@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Profesionales - Tu Nombre</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ----------------- RESET ----------------- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #000; color: #fff; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        h1, h2, h3 {
+            background: linear-gradient(270deg, #f58529, #dd2a7b, #8134af, #f58529);
+            background-size: 600% 600%;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientAnimation 5s ease infinite;
+        }
+        @keyframes gradientAnimation {
+            0% {background-position:0% 50%;}
+            50% {background-position:100% 50%;}
+            100% {background-position:0% 50%;}
+        }
+
+        /* HEADER */
+        header { padding: 60px 20px; text-align: center; }
+        header h1 { font-size: 3rem; }
+        header p { font-size: 1.2rem; margin-top: 10px; }
+
+        /* BOTONES */
+        .btn-primary {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .btn-primary:hover { transform: scale(1.05); opacity: 0.9; }
+        form label.btn-primary { display:inline-block; cursor: pointer; text-align: center; }
+        #fileName { display: block; margin-top: 10px; font-size: 0.9rem; color: #aaa; }
+
+        /* SECCIONES */
+        section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        h2 { text-align: center; font-size: 2.5rem; margin-bottom: 40px; }
+
+        /* Servicios */
+        .services { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .service-card {
+            background-color: #111; padding: 20px; border-radius: 15px; width: 250px;
+            text-align: center; transition: 0.3s;
+        }
+        .service-card:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 20px rgba(255,255,255,0.2); }
+
+        /* Portafolio */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .portfolio-item { position: relative; overflow: hidden; }
+        .portfolio-item:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 20px rgba(255,255,255,0.2); }
+        .portfolio-item img { width: 100%; display: block; }
+        .portfolio-item p {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: rgba(0,0,0,0.6); padding: 10px 0; opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .portfolio-item:hover p { opacity: 1; }
+
+        /* Formularios */
+        form {
+            background-color: #111; padding: 20px; border-radius: 15px;
+            max-width: 600px; margin: 0 auto;
+        }
+        form label { display: block; margin-bottom: 5px; margin-top: 15px; font-weight: bold; }
+        form input, form textarea {
+            width: 100%; padding: 10px; border-radius: 8px; border: none;
+            margin-bottom: 10px; background-color: #222; color: #fff;
+        }
+        form input[type="file"] { padding: 3px; }
+        form button { margin-top: 10px; }
+
+        /* Footer */
+        footer { text-align: center; padding: 40px 20px; background-color: #111; font-size: 0.9rem; color: #aaa; }
+
+        /* Responsive */
+        @media (max-width: 768px) { .services { flex-direction: column; align-items: center; } }
+
+        /* Animación fade-in */
+        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Modal */
+        .modal {
+            display: none; position: fixed; z-index: 1000; padding-top: 60px;
+            left: 0; top: 0; width: 100%; height: 100%; overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .modal-content { margin: auto; display: block; max-width: 80%; }
+        #modal-caption { text-align: center; color: #fff; margin: 15px 0; }
+        .close { position: absolute; top: 30px; right: 45px; color: #fff; font-size: 40px; cursor: pointer; }
+       /* Redes sociales - Íconos redondos */
+.social-icons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Tamaño uniforme para todos los íconos */
+.social-icons a {
+    width: 45px;
+    height: 45px;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+
+.social-icons a svg {
+    width: 26px;   /* Tamaño igual para todos los SVG */
+    height: 26px;
+    fill: rgb(207, 38, 137);
+}
+
+/* TikTok: SVG ajustado ópticamente */
+.social-icons a.tiktok svg {
+    width: 30px;   /* EXTRA para que se vea igual de grande */
+    height: 30px;
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>Bit Nova</h1>
+        <p>Servicios Profesionales</p>
+    </header>
+
+    <!-- SERVICIOS -->
+  <section id="services">
+    <h2>Servicios</h2>
+    <div class="services">
+        <div class="service-card"><h3>Locución</h3><p>Voz profesional para videos, podcasts y publicidad.</p></div>
+        <div class="service-card"><h3>Edición de Videos</h3><p>Postproducción, efectos, subtítulos y optimización para redes.</p></div>
+        <!-- Agrega aquí más servicios si querés -->
+    </div>
+</section>
+
+    <!-- PORTAFOLIO -->
+    <section id="trabajos" style="padding: 40px 0; text-align: center;">
+  <h2>Video publicitario narrado por mí</h2>
+
+  <div style="max-width: 640px; margin: 0 auto;">
+    <iframe title="vimeo-player" 
+            src="https://player.vimeo.com/video/1141196140?h=2b9388a1f4" 
+            width="100%" 
+            height="360" 
+            frameborder="0" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+            allowfullscreen>
+    </iframe>
+    <p>Este video incluye tres trabajos publicitarios narrados por mí.</p>
+  </div>
+<!-- SECCIÓN DE PAGOS FINAL -->
+<section id="pagos" style="padding: 40px 0; text-align: center; background-color: #000000; color: white;">
+  <h2>Un gusto en que me contrates.</h2>
+  <p>Puedes pagar por los servicios de locución o edición de video de manera rápida y segura, solicito el 50% como seña, sin excepciones:</p>
+
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-top: 20px;">
+
+    <!-- Mercado Pago -->
+    <a href="https://link.mercadopago.com.ar/bitnova" target="_blank"
+       style="display:inline-block; width:200px; text-align:center; background-color:#ffcc00; color:#000; padding:12px 0; font-size:16px; border-radius:5px; text-decoration:none;">
+       Pagar con Mercado Pago
+    </a>
+    <p style="color:#cccccc; font-size:12px; margin-top:5px;">
+       Pago seguro a nombre de bitnova vía Mercado Pago.
+    </p>
+
+    <!-- PayPal -->
+    <a href="https://www.paypal.com/donate?business=beti.ruizdiaz@gmail.com&currency_code=USD" target="_blank"
+       style="display:inline-block; width:200px; text-align:center; background-color:#003087; color:white; padding:12px 0; font-size:16px; border-radius:5px; text-decoration:none;">
+       Pagar con PayPal
+    </a>
+    <p style="color:#cccccc; font-size:12px; margin-top:5px;">
+       Pago seguro vía PayPal (cuenta personal)
+    </p>
+
+    <!-- Lemon ARS -->
+    <a href="#" onclick="navigator.clipboard.writeText('colmena.mancha.LEMON'); alert('Alias copiado al portapapeles!')" 
+       style="display:inline-block; width:200px; text-align:center; background-color:#39ff14; color:#000; padding:12px 0; font-size:16px; border-radius:5px; text-decoration:none;">
+       Pagar con Lemon (ARS)
+    </a>
+    <p style="color:#cccccc; font-size:12px; margin-top:5px;">
+       Alias: colmena.mancha.LEMON — Gratis desde otra cuenta Lemon
+    </p>
+
+    <!-- Lemon BTC -->
+    <a href="#" onclick="navigator.clipboard.writeText('bc1qhwtl02907amnzv0zrncnqxzaka9nffw2ln9y8q'); alert('Dirección BTC copiada!')" 
+       style="display:inline-block; width:200px; text-align:center; background-color:#39ff14; color:#000; padding:12px 0; font-size:16px; border-radius:5px; text-decoration:none;">
+       Pagar con Lemon (BTC)
+    </a>
+    <p style="color:#cccccc; font-size:12px; margin-top:5px;">
+       Dirección BTC: bc1qhwtl02907amnzv0zrncnqxzaka9nffw2ln9y8q
+    </p>
+
+  </div>
+
+  <p style="margin-top:15px; font-size:14px; color:#cccccc;">
+    Una vez completado el pago, nos pondremos en contacto para coordinar tu proyecto.
+  </p>
+</section>
+<!-- ...otras secciones existentes de tu landing -->
+
+<!-- NUEVA SECCIÓN DE PAGOS -->
+<section id="pagos">
+  
+</section>
+
+<!-- NUEVA SECCIÓN DE COMPROBANTE -->
+<section id="comprobante">
+  
+</section>
+
+<!-- SCRIPT PARA CONFIRMACIÓN DEL FORMULARIO -->
+<script>
+  const form = document.getElementById('formComprobante');
+  const mensaje = document.getElementById('mensajeConfirmacion');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    mensaje.style.display = 'block';
+    form.reset();
+  });
+</script>
+
+<!-- ...resto de tus scripts existentes (portafolio, colores, etc.) -->
+
+
+
+
+    <!-- FORMULARIOS -->
+    <section id="contact">
+        <h2>Contacto</h2>
+        <form action=https://formspree.io/f/xvgjadbb method="post">
+            <label for="name">Nombre</label><input type="text" id="name" name="name" required>
+            <label for="email">Correo</label><input type="email" id="email" name="email" required>
+            <label for="message">Mensaje</label><textarea id="message" name="message" rows="5" required></textarea>
+            <button type="submit" class="btn-primary">Enviar</button>
+        </form>
+     
+<h2>Enviar contenido para proyecto</h2>
+<form action="https://api.web3forms.com/submit" method="POST">
+    <!-- Clave de acceso Web3Forms -->
+    <input type="hidden" name="access_key" value="e749a220-08bb-48dd-b44d-cd459ad03bb2">
+
+    <!-- Nombre del proyecto -->
+    <label for="projectName">Nombre del proyecto</label>
+    <input type="text" id="projectName" name="name" required>
+
+    <!-- Descripción -->
+    <label for="projectDesc">Descripción</label>
+    <textarea id="projectDesc" name="message" rows="4" required></textarea>
+
+    <!-- Link al archivo en la nube -->
+    <label for="projectFileLink">Link al archivo (Google Drive, Dropbox, etc.)</label>
+    <input type="url" id="projectFileLink" name="file_link" placeholder="https://..." required>
+
+    <!-- Botón de envío -->
+    <button type="submit" class="btn-primary">Enviar Contenido</button>
+</form>
+
+
+       
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <section id="about">
+        <h2>Sobre mí</h2>
+        <p>Mi nombre es Betina Ruiz Diaz y cuento con experiencia en locución, edición de videos y conocimientos en programación web.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Bit Nova. Todos los derechos reservados.</p>
+        <p>Sígueme en redes sociales: Instagram | LinkedIn | Twitter</p>
+        <section id="redes">
+    <section id="redes">
+    <h2>Mis Redes</h2>
+<div class="social-icons">
+
+    <!-- Instagram -->
+    <a href="https://instagram.com/BETT.R.D" target="_blank">
+        <svg viewBox="0 0 24 24">
+            <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 7.2A2.7 2.7 0 1 1 14.7 12 2.7 2.7 0 0 1 12 14.7zm4.8-8.9a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1z"/>
+        </svg>
+    </a>
+
+    <!-- Facebook -->
+    <a href="https://facebook.com/Bett RD" target="_blank">
+        <svg viewBox="0 0 24 24">
+            <path d="M13 3h4V0h-4c-3.3 0-6 2.7-6 6v3H4v4h3v11h4V13h3l1-4h-4V6c0-1.1.9-2 2-2z"/>
+        </svg>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://youtube.com/@betinaruizdiaz4133" target="_blank">
+        <svg viewBox="0 0 24 24">
+            <path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C17.2 2.5 12 2.5 12 2.5h-.1s-5.2 0-8.6.3c-.4.1-1.3.1-2.1 1-.6.7-.8 2.4-.8 2.4S0 8.1 0 10v1.9c0 1.9.2 3.8.2 3.8s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 1.7.2 7.2.3 7.2.3s5.2 0 8.6-.3c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4S24 13.9 24 12V10c0-1.9-.5-3.8-.5-3.8zm-14 8.2V8l6.2 3.2-6.2 3.2z"/>
+        </svg>
+    </a>
+
+    <!-- TikTok -->
+    <a href="https://tiktok.com/@bett546" target="_blank" class="tiktok">
+        <svg viewBox="0 0 256 256">
+            <path d="M168 32h32c0 18 14 32 32 32v32c-17 0-33-6-46-16v80c0 35-29 64-64 64s-64-29-64-64 29-64 64-64c6 0 12 1 18 3v33c-5-2-11-3-18-3-17 0-32 14-32 32s15 32 32 32 32-14 32-32V32z"/>
+        </svg>
+    </a>
+    <!-- LinkedIn -->
+<a href="https://www.linkedin.com/in/betina-ruiz-diaz-6b0a00107inkedin">
+    <svg viewBox="0 0 24 24">
+        <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zM8.5 8h3.8v2.2h.1c.6-1.1 2-2.2 4.1-2.2 4.4 0 5.2 2.9 5.2 6.6V24h-4v-8.5c0-2-.1-4.5-2.8-4.5-2.8 0-3.2 2.1-3.2 4.3V24h-4V8z"/>
+    </svg>
+</a>
+
+
+</div>
+
+   
+</section>
+
+
+    </footer> 
+
+    <!-- MODAL -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="modal-caption"></div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Mostrar nombre del archivo seleccionado
+        const fileInput = document.getElementById('projectFile');
+        const fileNameDisplay = document.getElementById('fileName');
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = fileInput.files[0].name;
+            } else {
+                fileNameDisplay.textContent = 'Ningún archivo seleccionado';
+            }
+        });
+
+        // Animación fade-in
+        const faders = document.querySelectorAll(".fade-in");
+        const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+        const appearOnScroll = new IntersectionObserver(function(entries, observer){
+            entries.forEach(entry => {
+                if(entry.isIntersecting){
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        faders.forEach(fader => { appearOnScroll.observe(fader); });
+
+        // Modal portafolio
+        const modal = document.getElementById("modal");
+        const modalImg = document.getElementById("modal-img");
+        const modalCaption = document.getElementById("modal-caption");
+        const closeBtn = document.getElementsByClassName("close")[0];
+
+        document.querySelectorAll(".portfolio-item img").forEach(img => {
+            img.addEventListener("click", () => {
+                modal.style.display = "block";
+                modalImg.src = img.src;
+                modalCaption.innerHTML = img.nextElementSibling.innerText;
+            });
+        });
+
+        closeBtn.onclick = () => { modal.style.display = "none"; };
+        modal.onclick = (e) => { if(e.target==modal) modal.style.display="none"; };
+    </script>
+</body>
+</html>
